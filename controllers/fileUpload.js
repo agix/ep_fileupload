@@ -48,7 +48,7 @@ exports.onRequest = function (req, res) {
     var extension = files.uploadfile.name.split('.').pop();
 
     hashFile(tmp, undefined, undefined, function (err, hash) {
-      var name = hash + "." + extension;
+      var name = files.uploadfile.name.split('.').shift() + "_" + hash + "." + extension;
       var perm = path.normalize(path.join(__dirname, "..", "upload", name));
       fs.rename(tmp, perm, function(err) {
         fs.unlink(tmp, function() {
